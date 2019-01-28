@@ -11,22 +11,15 @@
 #### Go
 ```go
 func plusOne(digits []int) []int {
-    flag := true
     for i:= len(digits)-1; i>=0; i--{
-        if flag{
+        if digits[i]==9{
+            digits[i] = 0
+        }else{
             digits[i]++
-            flag = false
-        }
-        if digits[i] >= 10{
-            digits[i] %= 10
-            flag = true
+            return digits
         }
     }
-    if flag{
-        digits[0] %= 10
-        digits = append([]int{1}, digits...)
-    }
-    return digits
+        return append([]int{1}, digits...)
 }
 ```
 #### JavaScript (直觀解)
