@@ -95,4 +95,33 @@ def twoSum(self, nums, target):
 ```
 - Tips：In Python, the Dictionary data types represent the implementation of hash tables.
 - 解釋：這個實作方式下，index一定小於i（因為是找之前存進hashtable的），所以是return [index, i]。
+
+#### JavaScript (Two Pointers)
+```javascript
+var twoSum = function(nums, target) {
+    let sortedNums = new Array(...nums).sort((a, b) => a - b)
+    // es6
+    // let sortedNums = [...nums].sort((a, b) => a - b)
+    let l = 0, r = nums.length - 1
+    while(l < r) {
+        let sum = sortedNums[l] + sortedNums[r]
+        if(sum > target)
+            r--
+        else if(sum < target)
+            l++
+        else 
+            return [nums.indexOf(sortedNums[l]), nums.lastIndexOf(sortedNums[r])]
+    }
+}
+```
+#### JavaScript (One-pass hashtable)
+```javascript
+var twoSum = function(nums, target) {
+    let hashMap = {}
+    for(let i = 0; i < nums.length; ++i)
+        if(hashMap[target - nums[i]] !== undefined)
+            return [hashMap[target - nums[i]], i]
+        else hashMap[nums[i]] = i
+}
+```
 ---
