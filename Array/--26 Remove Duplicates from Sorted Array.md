@@ -45,4 +45,16 @@ def removeDuplicates(self, nums):
 ```
 - 解釋：長度為0或1則不可能有duplicate的情況，直接回傳長度即可。
 - 優/缺點：複雜度為O(n)
+
+#### JavaScript
+```javascript
+var removeDuplicates = function(nums) {
+    let curIndex = 0
+    for(let i = 1; i < nums.length; ++i)
+        if(nums[curIndex] !== nums[i])
+            nums[++curIndex] = nums[i]
+
+    return curIndex + 1
+}
+```
 ---
