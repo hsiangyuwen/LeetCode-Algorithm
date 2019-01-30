@@ -23,4 +23,19 @@ func generate(numRows int) [][]int {
     return result
 }
 ```
+
+#### JavaScript
+```javascript
+var generate = function(numRows) {
+    let result = []
+    for(let i = 0; i < numRows; ++i) {
+        let row = [1]
+        for(let j = 1; j <= i; ++j)
+            row.push((res[i - 1][j - 1] || 0) + (res[i - 1][j] || 0))
+        
+        result.push(row)
+    }
+    return result
+}
+```
 ---
