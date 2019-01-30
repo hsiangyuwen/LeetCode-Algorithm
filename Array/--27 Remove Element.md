@@ -52,4 +52,16 @@ def removeElement(self, nums, val):
             length += 1
     return length
 ```
+
+#### JavaScript (inplace)
+```javascript
+var removeElement = function(nums, val) {
+    let curIndex = 0
+    for(let i = 0; i < nums.length; ++i)
+        if(nums[i] !== val)
+            nums[curIndex++] = nums[i]
+
+    return curIndex
+}
+```
 ---
