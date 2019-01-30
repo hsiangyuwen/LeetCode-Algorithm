@@ -88,7 +88,7 @@ def twoSum(self, nums, target):
         
     for i in range(len(nums)):
         index = hashmap.get(target - nums[i], None)
-        if index is not None and index != i:
+        if index is not None:
             return [index, i]
         
         hashmap[nums[i]] = i
