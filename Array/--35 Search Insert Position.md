@@ -25,4 +25,15 @@ def searchInsert(self, nums, target):
 ```
 - Tips：Submit測資中沒有nums為空的狀況，故沒有做檢查。
 - 解釋：如果都找不到大於等於target的值，就放最後面（回傳值剛好就是nums長度）。
+
+#### JavaScript
+```javascript
+var searchInsert = function(nums, target) {
+    for(let i = 0; i < nums.length; ++i)
+        if(target <= nums[i])
+            return i
+
+    return nums.length
+}
+```
 ---
