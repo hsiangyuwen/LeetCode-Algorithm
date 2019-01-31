@@ -33,4 +33,19 @@ def containsNearbyDuplicate(self, nums, k):
     return False
 ```
 - 優/缺點：40ms, 100.00%
+
+#### JavaScript (Hash)
+##### tags: `hash`
+```javascript
+var containsNearbyDuplicate = function(nums, k) {
+    let hashmap = {}
+    for(let i = 0; i < nums.length; ++i)
+        if(hashmap[nums[i]] >= 0 && i - hashmap[nums[i]] <= k)
+            return true
+        else
+            hashmap[nums[i]] = i
+
+    return false
+}
+```
 ---
