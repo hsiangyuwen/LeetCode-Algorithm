@@ -24,4 +24,16 @@ def moveZeroes(self, nums):
 ```
 - Tips：利用slice方式，把新建出來的bytearray assign給原本list的某片段，是python實作memset效果的一種方式。
 
+#### JavaScript
+```javascript
+var moveZeroes = function(nums) {
+    let curIndex = 0
+    for(let num of nums)
+        if(num !== 0)
+            nums[curIndex++] = num
+
+    while(curIndex < nums.length)
+        nums[curIndex++] = 0
+}
+```
 ---
