@@ -47,8 +47,35 @@ func majorityElement(nums []int) int {
     return key
 }
 ```
----
 - 解釋
 透過計數方式加減值，因為數字過半，所以最終的值都會是過半的那個。
 - 優/缺點
 不但是O(N)還是S(1)
+
+#### JavaScript
+```javascript
+var majorityElement = function(nums) {
+    let cache = {}, n = Math.floor(nums.length / 2)
+    for(let num of nums) {
+        cache[num] = (cache[num] || 0) + 1
+        if(cache[num] > n)
+            return num
+    }
+}
+```
+
+#### JavaScript (Boyer-Moore Algorithm)
+```javascript
+var majorityElement = function(nums) {
+    let key = undefined, count = 0
+    nums.forEach(num => {
+        if(count === 0) {
+            key = num
+            count++
+        } else
+            key === num ? count++ : count--
+    })
+    return key
+}
+```
+---
