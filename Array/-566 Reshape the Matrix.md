@@ -30,4 +30,55 @@ def matrixReshape(self, nums, r, c):
     
     return matrix
 ```
+
+#### JavaScript (直觀解)
+``` javascript
+var matrixReshape = function(nums, r, c) {
+    let preRow = nums.length, preCol = nums[0].length
+    if(preRow * preCol !== r * c) return nums
+    let matrix = []
+    for(let flatIndex = 0; flatIndex < r * c; ++flatIndex) {
+        let rowIndex = Math.floor(flatIndex / c)
+        if(!matrix[rowIndex]) matrix.push([])
+        matrix[rowIndex].push(nums[Math.floor(flatIndex / preCol)][flatIndex % preCol])
+    }
+    return matrix
+}
+```
+
+#### JavaScript (精簡)
+```javascript
+var matrixReshape = function(nums, r, c) {
+    if(nums.length * nums[0].length !== r * c) return nums
+    let matrix = []
+    for(let i = 0, list = []; i < nums.length; ++i) {
+        list.push(...nums[i])
+        while(list.length >= c)
+            matrix.push(list.splice(0, c))
+    }
+    return matrix
+}
+```
+
+#### JavaScript (2 liner)
+```javascript
+var matrixReshape = function(nums, r, c) {
+    let flatMatrix = nums.reduce((acc, cur) => acc.concat(cur), [])
+    return flatMatrix.length === r * c ?
+        new Array(r).fill(0).map((row, index) => flatMatrix.slice(c * index, c * index + c)) :
+        nums
+}
+```
+- 解釋：
+    1. 把 matrix 扁平化有 es6 的寫法：
+        ```javascript
+        let flatMatrix = nums.reduce((acc, cur) => [...acc, ...cur], [])
+        ```
+    2. 拆 flat matrix 也有另一種寫法：
+        ```javascript
+        new Array(r).fill(0).map((row, index) => flatMatrix.splice(0, c))
+        ```
+    3. `slice` vs `splice`：後者會真的動到陣列，前者只是把要的部份複製出來，原陣列保持不變。
+
+
 ---
