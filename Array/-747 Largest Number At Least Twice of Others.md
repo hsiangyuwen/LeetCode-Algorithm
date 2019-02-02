@@ -32,4 +32,19 @@ def dominantIndex(self, nums):
     
     return nums.index(H[1]) if H[1] >= 2 * H[0] else -1
 ```
+
+#### JavaScript
+```javascript
+var dominantIndex = function(nums) {
+    let max1 = -1, max2 = -1, maxIndex = -1
+    for(let i = 0; i < nums.length; ++i) {
+        if(nums[i] > max1) {
+            [max1, max2] = [nums[i], max1]
+            maxIndex = i
+        } else if (nums[i] > max2)
+            max2 = nums[i]
+    }
+    return max1 >= max2 * 2 ? maxIndex : -1
+}
+```
 ---
