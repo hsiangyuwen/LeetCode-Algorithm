@@ -41,4 +41,22 @@ def findMaxAverage(self, nums, k):
     return max(map(operator.sub, sums[k:], sums)) / k
 
 ```
+
+#### JavaScript (直觀解, 2 liner)
+```javascript
+var findMaxAverage = function(nums, k) {
+    for(let i = 1; i < nums.length; ++i)
+        nums[i] += nums[i - 1]
+    for(let i = nums.length - 1; i >= k; --i)
+        nums[i] -= nums[i - k]
+    return Math.max(...nums.slice(k - 1)) / k
+}
+```
+- 解釋：觀察兩次 for loop 的結果。
+    ```
+    Example: [ 1, 12, -5, -6, 50, 3 ], k = 4
+    After first for loop: [ 1, 13, 8, 2, 52, 55 ] (第 i 個元素是 0 ~ i 的總和)
+    After seconde for loop: [ 1, 13, 8, 2, 51, 42 ] (第 i 個元素是 i-k ~ i 的總和)
+    * 注意：經過兩次 for loop 第 0 ~ k-2 個元素不符合需求，所以不能拿它們比大小。
+    ```
 ---
