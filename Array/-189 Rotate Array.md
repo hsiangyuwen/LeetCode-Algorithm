@@ -65,7 +65,5 @@ func rotate(nums []int, k int) {
 	}
 }
 ```
-- 解釋
-  還沒寫
 - 優/缺點
   O(n) S(1)
