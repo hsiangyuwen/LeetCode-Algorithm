@@ -1,10 +1,12 @@
-
-## [27. Remove Element](https://leetcode.com/problems/remove-element/submissions/)
+## [27. Remove Element](https://leetcode.com/problems/remove-element/)
 > :black_nib: Cropse
 ### 題目解釋
-    只能使用S(1)且掃一遍的狀況下，列出移除指定數字的列表。
+    只能在空間複雜度O(1)且只掃一遍的狀況下，列出移除了指定數字的陣列。
 ### 審題注意
-    輸入數字是長度，但是題目本身會用輸入列表reference，所以一定要改動列表。
+    回傳的是處理後的陣列長度，但是題目本身會用輸入陣列reference，所以一定要改動陣列。
+
+    另外，因為"It doesn't matter what you leave beyond the returned length."，
+    只要管好前面「處理後的長度」個元素就好了，後面不用理會存了什麼。
 ### 解法
 #### Go (直觀解)
 ```go
@@ -23,6 +25,7 @@ func removeElement(nums []int, val int) int {
 ```
 - 解釋：一邊紀錄非指定數字，然後切割list，再調整index位置
 - 優/缺點：直觀，但是分割list其實沒有必要
+
 #### Go (inplace)
 ```go
 func removeElement(nums []int, val int) int {
@@ -37,20 +40,19 @@ func removeElement(nums []int, val int) int {
 }
 ```
 - 解釋：因為是要移除數值，所以迴圈中的i≥index，所以只要把值往前複製就可以了，最後輸出時index位置後面的列表其實不重要。
+
 #### Python (inplace)
 ```python
-def removeElement(self, nums, val):
-    """
-    :type nums: List[int]
-    :type val: int
-    :rtype: int
-    """
+def removeElement(self, nums: 'List[int]', val: 'int') -> 'int':
     length = 0
-    for i, num in enumerate(nums):
-        if num != val:
-            nums[length] = num
+
+    for i in range(len(nums)):
+        if nums[i] != val:
+            nums[length] = nums[i]
             length += 1
+    
     return length
+
 ```
 
 #### JavaScript (inplace)
