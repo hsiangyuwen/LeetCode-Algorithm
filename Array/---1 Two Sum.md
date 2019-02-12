@@ -124,4 +124,19 @@ var twoSum = function(nums, target) {
         else hashMap[nums[i]] = i
 }
 ```
+#### Golang (One-pass hashtable)
+```go
+func twoSum(nums []int, target int) []int {
+    hashmap := make(map[int]int)
+    for i, num := range nums{
+        if val, ok := hashmap[num]; ok==false{
+            hashmap[target-num] = i
+        }else{
+            return []int{val, i}
+        }
+    }
+    return nil
+}
+```
+
 ---
