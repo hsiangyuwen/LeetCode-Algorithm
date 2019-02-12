@@ -24,6 +24,38 @@ func generate(numRows int) [][]int {
 }
 ```
 
+#### Python
+```python
+def generate(self, numRows: 'int') -> 'List[List[int]]':
+    ret = []
+    for i in range(numRows):
+        row = [1]
+        for j in range(1, i+1):
+            a = ret[i-1][j-1] if j > 0 else 0
+            b = ret[i-1][j] if j < i else 0
+            row.append(a+b)
+        ret.append(row)
+    
+    return ret
+```
+
+#### Python (map function)
+##### tags: `map` , `lambda`
+```python
+def generate(self, numRows: 'int') -> 'List[List[int]]':
+    ret = [[1]] if numRows else []
+    for i in range(1, numRows):
+        ret.append(list(map(lambda x, y: x + y, ([0] + ret[-1]), (ret[-1] + [0]))))
+    return ret
+```
+- 解釋：
+```
+    1 3 3 1 0 
+ +  0 1 3 3 1
+ =  1 4 6 4 1
+```
+- Ref: [map function](http://www.runoob.com/python/python-func-map.html)
+
 #### JavaScript
 ```javascript
 var generate = function(numRows) {
