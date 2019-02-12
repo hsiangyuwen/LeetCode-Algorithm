@@ -22,6 +22,17 @@ func plusOne(digits []int) []int {
         return append([]int{1}, digits...)
 }
 ```
+#### Python3
+```python
+def plusOne(self, digits: 'List[int]') -> 'List[int]':
+    for i in range(len(digits) - 1, -1, -1):  # len-1, len-2, ... , 0
+        digits[i] += 1
+        if digits[i] == 10:
+            digits[i] = 0
+        else:
+            return digits
+    return [1] + digits
+```
 #### JavaScript (直觀解)
 ```javascript
 var plusOne = function(digits) {
