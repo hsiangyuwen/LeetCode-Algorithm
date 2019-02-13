@@ -53,7 +53,7 @@ var twoSum = function(numbers, target) {
 ```
 - 解釋：用二元搜尋去查找符合相加等於 `target` 的元素。
   - (最好情況 O(lgn)，最壞情況 O(nlgn))
-### Go (directly search)
+#### Go (directly search)
 ```go
 func twoSum(numbers []int, target int) []int {
 	left, right := 0, len(numbers)-1
@@ -69,7 +69,7 @@ func twoSum(numbers []int, target int) []int {
 	return []int{}
 }
 ```
-### Go (hash)
+#### Go (hash)
 ```go
 func twoSum(numbers []int, target int) []int {
     dic := map[int]int{}
@@ -81,5 +81,31 @@ func twoSum(numbers []int, target int) []int {
     }
     return []int{}
 }
+```
+
+#### Python3 (directly search)
+```python
+def twoSum(self, numbers: 'List[int]', target: 'int') -> 'List[int]':
+    left = 0
+    right = len(numbers) - 1
+    while(left < right):
+        two_sum = numbers[left] + numbers[right]
+        if two_sum == target:
+            return[left + 1, right + 1]
+        elif two_sum < target:
+            left += 1
+        else:
+            right -= 1
+```
+
+#### Python3 (dictionary)
+```python
+def twoSum(self, numbers: 'List[int]', target: 'int') -> 'List[int]':
+    dic = {}
+    for i in range(len(numbers)):
+        if (target - numbers[i]) in dic:
+            return [dic[target - numbers[i]] + 1, i + 1]
+        else:
+            dic[numbers[i]] = i
 ```
 ---
