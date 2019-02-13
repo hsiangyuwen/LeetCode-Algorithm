@@ -138,5 +138,38 @@ func twoSum(nums []int, target int) []int {
     return nil
 }
 ```
+#### Golang (Two Pointers)
+```go
+import "sort"
 
+func twoSum(nums []int, target int) []int {
+	sortNums := make([]int, len(nums))
+	copy(sortNums, nums)
+	sort.Ints(sortNums)
+	for l, r := 0, len(nums)-1; l < r; {
+		if sortNums[l]+sortNums[r] > target {
+			r--
+		} else if sortNums[l]+sortNums[r] < target {
+			l++
+		} else {
+			return Find(nums, []int{sortNums[l], sortNums[r]})
+		}
+	}
+	return nil
+}
+func Find(a []int, x []int) []int {
+	result := make([]int, len(x))
+	for i, j := 0, 0; i < len(a) && j < len(x); {
+		if a[i] != x[j] || (result[0] == i && j==1){
+			i++
+		} else{
+			result[j] = i
+			i = 0
+			j++
+		}
+	}
+	return result
+}
+```
+- 解釋：這個實作方式下，因為golang不支援find之類的做法，所以需要自己刻一個，同時也把重複index等問題在裡面一併處理掉。
 ---
