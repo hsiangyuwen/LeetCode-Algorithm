@@ -78,4 +78,36 @@ var majorityElement = function(nums) {
     return key
 }
 ```
+
+#### Python3
+```python
+def majorityElement(self, nums: 'List[int]') -> 'int':
+    dic = {}
+    length = len(nums) // 2
+    
+    if not length:
+        return nums[0]
+    
+    for num in nums:
+        if num in dic:
+            dic[num] += 1
+            if dic[num] > length:
+                return num
+        else:
+            dic[num] = 1
+```
+
+#### Python3 (Boyer-Moore Algorithm)
+```python
+def majorityElement(self, nums: 'List[int]') -> 'int':
+    key = count = 0
+    for num in nums:
+        if count == 0:
+            key = num
+            count = 1
+        else:
+            count = count - 1 if key != num else count + 1
+            
+    return key
+```
 ---
