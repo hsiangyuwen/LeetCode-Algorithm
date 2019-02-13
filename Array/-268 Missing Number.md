@@ -14,12 +14,12 @@
 const missingNumber = nums =>
     (nums.length * (nums.length + 1)) / 2 - nums.reduce((acc, cur) => acc + cur)
 ```
-- Tips
-    1. 0 加到 n 的公式解
-    2. Array (reduce)
 - 解釋
-    1. 0 加到 n 的公式解是 $\frac{(0 + n)(n + 1)}{2}, n = nums.length$
-    2. 減去 `nums` 的總和。
+    1. 0 加到 n 的公式解是：
+
+        <a  href="https://www.codecogs.com/eqnedit.php?latex=\frac{n&plus;1}{2}\cdot&space;(0&plus;n)"  target="_blank"><img  src="https://latex.codecogs.com/gif.latex?\frac{n&plus;1}{2}\cdot&space;(0&plus;n)"  title="\frac{n+1}{2}\cdot (0+n)"  /></a>
+
+    2. 0 加到 n 再減去 `nums` 的總和即可得到消失的那個數字。
 #### JavaScript (直觀解)
 ```javascript
 var missingNumber = function(nums) {
@@ -47,5 +47,26 @@ var missingNumber = function(nums) {
 ```javascript
 const missingNumber = nums =>
     nums.reduce((acc, cur, index) => acc ^ cur ^ index, nums.length)
+```
+
+#### Python3 (公式解)
+```python
+def missingNumber(self, nums: 'List[int]') -> 'int':
+    return len(nums) * (len(nums) + 1) // 2 - sum(nums)
+```
+
+#### Python3 (直觀解)
+```python
+def missingNumber(self, nums: 'List[int]') -> 'int':
+    ret = len(nums)
+    for i, num in enumerate(nums):
+        ret += (i - num)
+    return ret
+```
+
+#### Python3 (XOR)
+```python
+def missingNumber(self, nums: 'List[int]') -> 'int':
+    return (set(range(0, len(nums)+1)) - set(nums)).pop()
 ```
 ---
