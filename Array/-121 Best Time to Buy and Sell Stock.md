@@ -34,6 +34,23 @@ var maxProfit = function(prices) {
         maxProfit = Math.max(maxProfit, prices[i] - minPrice)
     }
     ```
+
+#### Python3 (直觀解)
+```python
+def maxProfit(self, prices: 'List[int]') -> 'int':
+    if not len(prices):
+        return 0
+    
+    min_price = prices[0]
+    max_profit = 0
+    
+    for i in range(1, len(prices)):
+        max_profit = max(max_profit, (prices[i] - min_price))
+        min_price = min(min_price, prices[i])
+    
+    return max_profit
+```
+
 #### JavaScript (Kadane Algorithm)
 ```javascript
 var maxProfit = function(prices) {
@@ -58,4 +75,17 @@ var maxProfit = function(prices) {
         3. 經過一次遍歷，`maxSoFar` 存的即是片段最大價差
         4. [延伸-最大子數列問題](https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E5%88%97%E9%97%AE%E9%A2%98)
     - 事實上，上述這兩種方法是異曲同工，Kadane 也是透過當前 `minPrice` 去更新 `maxProfit`，因為每當遇到更低的 price，便意味著要重新累加，重新累加就是根據最新的低價格去做後續的累加，在累加的過程中，去紀錄出現過的最大利潤。(可以多觀察例子中的兩種更新過程)
+    - 意即，`max_list[i]` 與 `max_list[i-1]` 和 `prices[i] - prices[i-1]` 的關係如下：
+        `max_list[i] = max(0, max_list[i-1] + (prices[i] - prices[i-1]))`
+
+#### Python3 (Kadane's Algorithm)
+```python
+def maxProfit(self, prices: 'List[int]') -> 'int':
+    max_ending_here = max_so_far = 0
+    for i in range(1, len(prices)):
+        max_ending_here = max(0, max_ending_here + (prices[i] - prices[i-1]))
+        max_so_far = max(max_so_far, max_ending_here)
+    
+    return max_so_far
+```
 ---
