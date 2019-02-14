@@ -63,4 +63,32 @@ var findPairs = function(nums, k) {
 ```
 - 解釋：先判斷 `counts` 中是否有 `n + k` 或 `n - k` 的存在，有的話則紀錄數對中大的值於 `res`，之後再將 `n` 存入 `counts` (如果先做這步驟， `k` 為 0 時會出錯)。
 - 優點：徹底發揮 `set` 的特性。
+
+#### Python3 (set)
+```python
+def findPairs(self, nums: 'List[int]', k: 'int') -> 'int':
+    if k < 0 or len(nums) == 0:
+        return 0
+
+    pairs = set()
+    counts = {}
+    for num in nums:
+        if num in counts:
+            counts[num] += 1
+        else:
+            counts[num] = 1
+    
+    if k == 0:
+        for key, value in counts.items():
+            if value >= 2:
+                pairs.add((key, key))
+    else:
+        for key, value in counts.items():
+            if key + k in counts:
+                pairs.add((key, key + k))
+            if key - k in counts:
+                pairs.add((key - k, key))
+    
+    return len(pairs)
+```
 ---
