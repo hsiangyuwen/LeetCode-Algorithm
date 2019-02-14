@@ -42,4 +42,29 @@ var findUnsortedSubarray = function(nums) {
  3. **找到 `start` 和 `end` 的意義何在？** `start` 可以想成需要調整的開端，`end` 則是結束，因為 `start` 索引上的值一定要調整才能符合升冪排序，`end` 亦是。
  
  4. **為什麼 `start` 初始值是 `-1`，`end` 是 `-2`？** 這是為整個陣列已經是升冪排序時設的特例，在該情況下，`start` 及 `end` 不會被更新，在最後 `end - start + 1` 會是 `0`，代表 unsorted subarray 長度為 0。
+
+#### Python3 (One-pass)
+```python
+def findUnsortedSubarray(self, nums):
+    """
+    :type nums: List[int]
+    :rtype: int
+    """
+    start = end = None
+    minimum = nums[-1]
+    maximum = nums[0]
+    
+    for i in range(len(nums)):
+        minimum = min(minimum, nums[-1 - i])
+        maximum = max(maximum, nums[i])
+        if nums[-1 - i] > minimum:  # minimum is modified
+            start = len(nums) - 1 - i
+        if nums[i] < maximum:  # maximum is modified
+            end = i
+    
+    if (start and end) is None:  # original list is already sorted
+        return 0
+
+    return end - start + 1
+```
 ---
