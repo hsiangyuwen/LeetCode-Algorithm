@@ -34,11 +34,41 @@ var canPlaceFlowers = function(flowerbed, n) {
         if(flowerbed[i - 1] + flowerbed[i] + flowerbed[i + 1] === 0)
             --n, ++i
 
-    return n === 0
+    return n == 0
 }
 ```
 - 解釋：
 	1. 在前後各插入一個 0，如此就不用判斷邊界條件。
 	2. 因為陣列只有 0 跟 1，所以判斷多個是否為 0 時只需要把全部加起來。
 	3. 發現可以放置的位置直接將 `n` 減一，可以想像成：事先給你 `n` 朵新花，沿著花圃種，種到手上沒花就結束；如果走完整個花圃手上還有花，則代表情況不符合。
+
+#### Python3 (精簡)
+```python
+def canPlaceFlowers(self, flowerbed: 'List[int]', n: 'int') -> 'bool':
+    length = len(flowerbed)
+    flowerbed = [0] + flowerbed + [0]
+    i = 1
+    while n > 0 and i <= length:
+        if (flowerbed[i - 1] + flowerbed[i] + flowerbed[i + 1]) == 0:
+            n -= 1
+            i += 1
+        i += 1
+    
+    return n == 0
+```
+
+#### Python3 (One-pass)
+```python
+def canPlaceFlowers(self, flowerbed: 'List[int]', n: 'int') -> 'bool':
+    flowerbed = [0] + flowerbed + [0, 1]
+    prev_1_index = -1
+    for i in range(len(flowerbed)):
+        if flowerbed[i] == 1:
+            zero_length = i - prev_1_index - 1
+            n -= (zero_length - 1) // 2
+            prev_1_index = i
+    
+    return n <= 0
+```
+- 解釋：0的長度要 (2k+1) 才可以放k朵花。將邊界改善完後，遍歷一次判斷各段連續的0的長度，求出各段能放多少朵花，看總和是否大於等於n。
 ---
