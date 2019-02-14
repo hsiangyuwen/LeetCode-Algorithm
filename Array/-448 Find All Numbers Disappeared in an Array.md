@@ -24,4 +24,10 @@ func findDisappearedNumbers(nums []int) []int {
     return cache[:count]
 }
 ```
+
+#### Python3 (Set, 1-line)
+```python
+def findDisappearedNumbers(self, nums: 'List[int]') -> 'List[int]':
+    return list(set(range(1, len(nums) + 1)) - set(nums))
+```
 ---
