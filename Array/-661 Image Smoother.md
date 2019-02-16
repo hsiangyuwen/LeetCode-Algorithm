@@ -52,5 +52,52 @@ func getValGen(M [][]int) func(y int, x int) (int, int) {
 golang的closure需要回傳function，可以改寫成傳址的方法，效率應該會更好一點。
 - 優/缺點
 沒有
-- 
+
+#### Python
+```python
+def imageSmoother(self, M: 'List[List[int]]') -> 'List[List[int]]':
+	ret = [[0] * len(M[0]) for _ in range(len(M))]  # Create an empty 2D-array
+	row_last = len(M) - 1
+	col_last = len(M[0]) - 1
+	
+	for row in range(len(M)):
+		for col in range(len(M[0])):
+			# Sum up all the 8 surrounding cells and itself(5).
+			# Position:
+			# 1 2 3
+			# 4 5 6
+			# 7 8 9
+
+			ret[row][col] += M[row][col]  # 5
+			cell_count = 1
+			if row != 0:
+				ret[row][col] += M[row-1][col]  # 2
+				cell_count += 1
+				if col != 0:
+					ret[row][col] += M[row-1][col-1]  # 1
+					cell_count += 1
+				if col != col_last:
+					ret[row][col] += M[row-1][col+1]  # 3
+					cell_count += 1
+			if row != row_last:
+				ret[row][col] += M[row+1][col]  # 8
+				cell_count += 1
+				if col != 0:
+					ret[row][col] += M[row+1][col-1]  # 7
+					cell_count += 1
+				if col != col_last:
+					ret[row][col] += M[row+1][col+1]  # 9
+					cell_count += 1
+			if col != 0:
+				ret[row][col] += M[row][col-1]  # 4
+				cell_count += 1
+			if col != col_last:
+				ret[row][col] += M[row][col+1]  # 6
+				cell_count += 1
+
+			# Divide the count of used cells.
+			ret[row][col] //= cell_count
+	
+	return ret
+```
 ---
