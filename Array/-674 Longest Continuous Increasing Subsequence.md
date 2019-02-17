@@ -59,4 +59,45 @@ func findLengthOfLCIS(nums []int) int {
 - 解釋
 - 優/缺點
 很難看
+
+#### Python
+```python
+def findLengthOfLCIS(self, nums: 'List[int]') -> 'int':
+	if len(nums) == 0:
+		return 0
+	
+	ret = 1
+	anchor = 0
+	for i in range(1, len(nums)):
+		if nums[i-1] >= nums[i]:
+			anchor = i
+		ret = max(ret, i - anchor + 1)
+	
+	return ret
+```
+- 解釋：從官方解答中改良。變數 `anchor` 存著上一次開始不increase的index。
+
+```python
+def findLengthOfLCIS(self, nums: 'List[int]') -> 'int':
+	if len(nums) == 0:
+		return 0
+	
+	ret = 1
+	temp = 1
+	pre = nums[0]
+	for i in range(1, len(nums)):
+		if nums[i] > pre:
+			temp += 1
+		else:
+			ret = max(ret, temp)
+			temp = 1
+		pre = nums[i]
+
+	ret = max(ret, temp)
+
+	return ret
+```
+- 解釋：直接用一個變數 `temp` 去累加而得到increase subsequence的長度。如果遇到不increase就再設回1。
+- Tips：因為是在「`temp`設回1」的時候去計算最大長度，在整個遍歷一次的過程後，要再檢查一次。
+
 ---
