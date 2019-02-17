@@ -34,6 +34,26 @@ var largeGroupPositions = function(S) {
     res     []         []              []                           [[2,4]]
     ```
     2. 唯一需要注意的地方就是：`line 4` 終止時，`end` 指向下一個不相同的字元，因此 `line 5` 的判斷式，可以想一個上方簡單的例子，起始索引跟結束索引至少要相差 **3** 以上才符合條件；另外，記錄起始和結束索引時，要將結束索引減一，原因如上(`end` 是指向下一個不相同字元)。
+
+#### Python3
+```python
+def largeGroupPositions(self, S: 'str') -> 'List[List[int]]':
+    ret = []
+    start = end = 0
+    while end < len(S):
+        if S[end] == S[start]:
+            end += 1
+        else:
+            if (end - start) >= 3:
+                ret.append([start, end - 1])
+            start = end
+
+    if end - start >= 3:
+        ret.append([start, end - 1])
+
+    return ret
+```
+
 #### Go
 ```go
 func largeGroupPositions(S string) [][]int {
