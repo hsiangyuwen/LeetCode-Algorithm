@@ -40,4 +40,11 @@ func flipAndInvertImage(A [][]int) [][]int {
 左右對調跟數字反轉其實可以用交換的，所以不需要S(N)。
 - 優/缺點
 又快又小，真的很棒。
+
+#### Python3 (1 line)
+```python
+def flipAndInvertImage(self, A: 'List[List[int]]') -> 'List[List[int]]':
+    return [[1 - item for item in reversed(row)] for row in A]
+```
+- 解釋：使用了兩個list comprehension。
 ---
