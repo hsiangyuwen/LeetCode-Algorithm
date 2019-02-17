@@ -65,4 +65,38 @@ var isMagic = (grid, r, c) => {
         ![](https://latex.codecogs.com/gif.latex?%5C%5C%20%5Csum_%7B1%7D%5E%7B9%7D%20a_i%20&plus;%203a_5%20%3D%2060%5C%5C%203a_5%20%3D%2015%20%5C%5C%20a_5%20%3D%205%5C%5C)
         
   3. 在 `isMagic` 中先判斷是否介於 1~9 之間且不重複 (`set`)，再判斷對角的和及每行每列的和。
+
+#### Python (One-pass)
+```python
+def numMagicSquaresInside(self, grid: 'List[List[int]]') -> 'int':
+    def is_magic(r, c):
+        # distinct numbers from 1 to 9
+        check = set()
+        for i in [-1, 0, 1]:
+            for j in [-1, 0, 1]:
+                num = grid[r + i][c + j]
+                if num in check or num > 9 or num < 1:
+                    return False
+                else:
+                    check.add(num)
+        
+        # diagonal
+        if grid[r - 1][c - 1] + grid[r + 1][c + 1] != 10 or \
+            grid[r - 1][c + 1] + grid[r + 1][c - 1] != 10:
+            return False
+        
+        # horizontal and vertical
+        for k in [-1, 0, 1]:
+            if grid[r + k][c - 1] + grid[r + k][c] + grid[r + k][c + 1] != 15 or \
+                grid[r - 1][c + k] + grid[r][c + k] + grid[r + 1][c + k] != 15:
+                return False
+        
+        return True
+
+    count = 0
+    for row in range(1, len(grid) - 1):
+        for col in range(1, len(grid[0]) - 1):
+            count += 1 if grid[row][col] == 5 and is_magic(row, col) else 0
+    return count
+```
 ---
