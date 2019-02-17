@@ -72,4 +72,35 @@ func findShortestSubArray(nums []int) int {
 }
 
 ```
+
+#### Python3
+```python
+def findShortestSubArray(self, nums: 'List[int]') -> 'int':
+    dic = {}
+    # key: value of the element
+    # value: [count, leftest_index, rightest_index]
+
+    for i, num in enumerate(nums):
+        if num not in dic:
+            dic[num] = [1, i, i]
+        else:
+            dic[num][0] += 1
+            dic[num][2] = i
+    
+    # degree should be a min value in initial
+    # return length should be a max value in initial
+    degree = -1
+    ret = 50000
+    for t in dic.values():
+        if t[0] > degree:
+            degree = t[0]
+            ret = t[2] - t[1] + 1
+        elif t[0] == degree:
+            ret = min(ret, (t[2] - t[1] + 1))
+    
+    return ret
+```
+- 解釋：官方解答直接用3個dictionary去紀錄，這個解法合併成一個，但解法觀念和官方解答相似：先記錄好各個數的出現次數、最左、最右，再去算最大degree和最小長度。
+- 複雜度：遍歷兩次，時間複雜度為O(n)；空間複雜度為O(n)
+
 ---
