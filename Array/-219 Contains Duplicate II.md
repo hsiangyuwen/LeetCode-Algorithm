@@ -49,3 +49,17 @@ var containsNearbyDuplicate = function(nums, k) {
 }
 ```
 ---
+#### Golang (Hash)
+```go
+func containsNearbyDuplicate(nums []int, k int) bool {
+    temp := make(map[int]int)
+    for i, val := range nums{
+        if mapIndex, ok := temp[val]; i-mapIndex <= k && ok{
+            return true
+        }else{
+            temp[val] = i
+        }
+    }
+    return false
+}
+```
