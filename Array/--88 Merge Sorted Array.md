@@ -94,6 +94,26 @@ def merge(self, nums1, m, nums2, n):
 - Tips：假想nums1是一個填入的空間，nums1<sub>[0 - m-1]</sub> 和 nums2<sub>[0 - n-1]</sub> 是用來參照的兩個已排好的數列。從右邊開始由大到小填入，就不會有 nums1<sub>[0 - m-1]</sub> 這個參照區被覆蓋掉的狀況。
 - 解釋：`for i in range(m + n - 1, -1, -1)`意同`for(i=(m+n-1); i>=0; i--)`。
 
+####Python3 (Merge Sort quicker)
+```python3
+class Solution:
+    def merge(self, nums1: 'List[int]', m: 'int', nums2: 'List[int]', n: 'int') -> 'None':
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        i = m - 1
+        j = n - 1
+        for k in range(m+n-1, -1, -1):
+            if j < 0 or i >= 0 and nums1[i] >= nums2[j]:
+                nums1[k] = nums1[i]
+                i-=1
+            else:
+                nums1[k] = nums2[j]
+                j-=1
+```
+- Tips：裡面的`j<0 or i>=0 and nums1[i] >= nums2[j]`排序很重要，可以根據i,j 的index判斷是否還需要做，也可以直接避免index error，還可以解決空值的輸入。
+- 解釋： 99% beats。
+
 #### JavaScript
 ```javascript
 var merge = function(nums1, m, nums2, n) {
@@ -105,7 +125,7 @@ var merge = function(nums1, m, nums2, n) {
 }
 ```
 
-#### golang
+#### golang (Merge Sort quicker)
 ```go
 func merge(nums1 []int, m int, nums2 []int, n int) {
 
