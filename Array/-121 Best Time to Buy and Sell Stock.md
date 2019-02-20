@@ -88,7 +88,7 @@ def maxProfit(self, prices: 'List[int]') -> 'int':
     
     return max_so_far
 ```
-#### golang(直觀解)
+#### Golang(直觀解)
 ```go
 func maxProfit(prices []int) int {
     if len(prices)<=1{
@@ -107,7 +107,7 @@ func maxProfit(prices []int) int {
     return max
 }
 ```
-#### golang(kadane's Algorithm)
+#### Golang(kadane's Algorithm)
 ```go
 func maxProfit(prices []int) int {
     maxCur := 0
