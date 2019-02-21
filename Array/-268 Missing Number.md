@@ -69,4 +69,34 @@ def missingNumber(self, nums: 'List[int]') -> 'int':
 def missingNumber(self, nums: 'List[int]') -> 'int':
     return (set(range(0, len(nums)+1)) - set(nums)).pop()
 ```
+#### Golang(公式解)
+```go
+func missingNumber(nums []int) int {
+    sum := (1+len(nums))*len(nums)/2
+    for _, val := range nums{
+        sum -= val
+    }
+    return sum
+}
+```
+#### Golang(直觀解)
+```go
+func missingNumber(nums []int) int {
+    sum := len(nums)
+    for i, val := range nums{
+        sum += i - val
+    }
+    return sum
+}
+```
+#### Golang(XOR)
+```go
+func missingNumber(nums []int) int {
+    sum := len(nums)
+    for i, val := range nums{
+        sum ^= i ^ val
+    }
+    return sum
+}
+```
 ---
