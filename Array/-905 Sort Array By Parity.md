@@ -74,4 +74,37 @@ const sortArrayByParity = A => {
 - 優點
     a. 時間是 O(n)，快
     b. **不需要**額外的存儲空間
+
+#### Python3 (sort)
+##### tags: `sort`
+```python
+def sortArrayByParity(self, A: List[int]) -> List[int]:
+    A.sort(key = lambda x: x % 2)
+    return A
+```
+- 解釋：參數key代表我們根據什麼樣的值對list進行排序。比方說list中每個元素都是長度為2的tuple，則我們可用 `key = lambda x: x[1]` 去根據tuple中第二個元素對list做排序。 `key = lambda x: x % 2` 則代表把每個元素根據奇偶性化成0與1再做由小到大的排序（偶數便會在前、奇數便會在後）。
+- 優/缺點：時間複雜度O(nlogn)、空間複雜度O(n)（因為Python sort的內部實作）。
+
+#### Python3 (list comprehension, 1 line)
+##### tags: `list comprehension`, `1 line`
+```python
+def sortArrayByParity(self, A: List[int]) -> List[int]:
+    return ([x for x in A if x % 2 == 0] + [x for x in A if x % 2 == 1])
+```
+- 優/缺點：只有Python使用這方式，程式碼會寫得清楚明瞭。時間複雜度O(n)、空間複雜度O(n)
+
+#### Python3 (swap)
+##### tags: `swap`
+```python
+def sortArrayByParity(self, A: List[int]) -> List[int]:
+    i = 0
+    for j in range(len(A)):
+        if A[j] % 2 == 0:
+            A[i], A[j] = A[j], A[i]
+            i += 1
+    
+    return A
+```
+- 解釋：改寫自quick sort的子問題處理方式，利用兩個指標去不斷看需不需要交換，並持續更新指標。
 ---
+
