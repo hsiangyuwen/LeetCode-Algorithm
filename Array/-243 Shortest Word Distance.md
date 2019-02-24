@@ -1,5 +1,19 @@
-## [243. Shortest Word Distance](https://leetcode.com/problems/shortest-word-distance/)
+## 243. Shortest Word Distance (Need Premium Permission)
 > :black_nib: Sammy
+### 原題
+    Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+
+    Example:
+    Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+        Input: word1 = “coding”, word2 = “practice”
+        Output: 3
+
+        Input: word1 = "makes", word2 = "coding"
+        Output: 1
+
+    Note:
+    You may assume that word1 does not equal to word2, and word1 and word2 are both in the list.
 ### 題目解釋
     給定一個word list以及兩個word。找出兩個word在這個word list當中的最短距離。
     題目假設兩個word不同，且兩個word一定都在這個word list當中。
