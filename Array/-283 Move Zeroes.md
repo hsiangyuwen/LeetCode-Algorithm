@@ -36,4 +36,19 @@ var moveZeroes = function(nums) {
         nums[curIndex++] = 0
 }
 ```
+#### golang(swap)
+```go
+func moveZeroes(nums []int)  {
+    for l,r:=0,1;r<len(nums);{
+        if nums[l] == 0 && nums[r] != 0{
+            nums[l], nums[r] = nums[r], nums[l]
+        }else if nums[l] == 0 && nums[r] == 0{
+            r++
+            continue
+        }
+        l++
+        r++
+    }
+}
+```
 ---
