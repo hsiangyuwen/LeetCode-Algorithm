@@ -106,5 +106,66 @@ def sortArrayByParity(self, A: List[int]) -> List[int]:
     return A
 ```
 - 解釋：改寫自quick sort的子問題處理方式，利用兩個指標去不斷看需不需要交換，並持續更新指標。
----
 
+#### Golang(swap)
+##### tags: `swap`
+```go
+func sortArrayByParity(A []int) []int {
+    for l, r := 0, len(A)-1; l<r;{
+        if A[l] % 2 == 1{
+            if A[r] %2 == 0{
+                A[l], A[r] = A[r], A[l]
+                l++
+                r--
+            }else{
+                r--
+            }
+        }else{
+            l++
+        }
+    }
+    return A
+}
+```
+- 解釋：設定左右點，如果兩邊符合交換的條件，就進行交換，沒有就向內推進，跟其他swap其實一樣O(n)。
+#### Golang(swap2)
+```go
+func sortArrayByParity(A []int) []int {
+    for i, j := 0, 0 ; j<len(A); j++{
+        if A[j] % 2 == 0{
+            A[i], A[j] = A[j], A[i]
+            i++
+        }
+    }
+    return A
+}
+```
+- 解釋：從左開始掃，掃到就往左邊換，指標i的左側就一定是偶數。
+
+#### Golang(sort)
+```go
+
+import (
+	"sort"
+)
+
+func sortArrayByParity(A []int) []int {
+	a := mySlice(A)
+	a.Sort()
+	return a
+}
+
+type mySlice sort.IntSlice
+
+// the function whcih replace
+// func (p mySlice) Less(i, j int) bool { return p[i] < p[j] }
+func (p mySlice) Less(i, j int) bool  { return p[i]%2 == 0 }
+
+func (p mySlice) Len() int           { return len(p) }
+func (p mySlice) Swap(i, j int)      { p[i], p[j] = p[j], p[i] }
+func (p mySlice) Sort() { sort.Sort(p) }
+func (p mySlice) Search(x int) int { return sort.SearchInts(p, x) }
+```
+- 解釋：繼承IntSlice，然後改寫Less方法
+---
+}
