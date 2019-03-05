@@ -64,5 +64,22 @@ def minCostClimbingStairs(self, cost: 'List[int]') -> 'int':
     
     return min(c_im2, c_im1)
 ```
-
+#### Goalgn(Bottom-up DP)
+```go
+func minCostClimbingStairs(cost []int) int {
+    fm1 := cost[1]
+    fm2 := cost[0]
+    for i:=2; i<len(cost); i++{
+        fm2, fm1 = fm1, cost[i] + min(fm1, fm2)
+    }
+    return min(fm2, fm1)
+}
+func min(a, b int)int{
+    if a < b{
+        return a
+    }else{
+        return b
+    }
+}
+```
 ---
