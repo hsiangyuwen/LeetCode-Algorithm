@@ -78,4 +78,5 @@ func findMaxAverage(nums []int, k int) float64 {
     return float64(max)/float64(k)
 }
 ```
+- 解釋：做法稍微不同，`prefixSum`把第一次的總數先加起來，每一次平移都會使用扣除左邊加上右邊，就可以得到所有的最大值，最後拿出最大值除出即可，不用後續再處理一次。
 ---
