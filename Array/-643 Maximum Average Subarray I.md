@@ -59,4 +59,23 @@ var findMaxAverage = function(nums, k) {
     After seconde for loop: [ 1, 13, 8, 2, 51, 42 ] (第 i 個元素是 i-k ~ i 的總和)
     * 注意：經過兩次 for loop 第 0 ~ k-2 個元素不符合需求，所以不能拿它們比大小。
     ```
+#### Golang(prefix-sum)
+```go
+func findMaxAverage(nums []int, k int) float64 {
+    prefixSum := []int{0}
+    for i:=0; i<k; i++{
+        prefixSum[0] += nums[i]
+    }
+    for i:=1; i<len(nums)-k+1; i++{
+        prefixSum = append(prefixSum, prefixSum[i-1] + nums[i+k-1] - nums[i-1])
+    }
+    max := math.MinInt64
+    for _, val := range prefixSum{
+        if max < val {
+            max = val
+        }
+    }
+    return float64(max)/float64(k)
+}
+```
 ---
