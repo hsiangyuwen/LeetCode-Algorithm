@@ -55,4 +55,35 @@ def maxDistToClosest(self, seats):
     return largest_distance
 
 ```
+####Golang
+```go
+func maxDistToClosest(seats []int) int {
+    max := 0
+    sideMax := math.MinInt64
+    distance := 0
+    for i := range seats{
+        if seats[i] == 1{
+            if max <= distance{
+                max = distance
+                if sideMax == math.MinInt64{
+                    sideMax = max
+                }
+            }
+            distance = 0
+        }else{
+            distance ++
+        }
+    }
+    if sideMax < distance{
+        sideMax = distance
+    }
+    return maxInt((max+1)/2, sideMax)
+}
+func maxInt(a,b int) int{
+    if a > b{
+        return a
+    }
+    return b
+}
+```
 ---
