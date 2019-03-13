@@ -105,4 +105,43 @@ def rotate(self, nums: 'List[int]', k: 'int') -> 'None':
                 start += 1
                 break
 ```
+
+#### JavaScript (3 Reverse)
+```javascript
+const reverse = (nums, start, end) => {
+    while(start < end)
+        [nums[start++], nums[end--]] = [nums[end], nums[start]]       
+}
+
+var rotate = (nums, k) => {
+    k %= nums.length
+    reverse(nums, 0, nums.length - 1)
+    reverse(nums, 0, k - 1)
+    reverse(nums, k, nums.length - 1)
+}
+```
+
+#### JavaScript (Cyclic Replacements)
+```javascript
+var rotate = (nums, k) => {
+    k %= nums.length
+    const getNextIndex = i => (i + k) % nums.length
+    let start = swapCount = 0
+    while(k && swapCount < nums.length) {
+        cur = start
+        toBeSwap = nums[start]
+        while(true) {
+            let _next = getNextIndex(cur)
+            toBeSwap = [nums[_next], nums[_next] = toBeSwap][0]
+            cur = _next
+            swapCount++
+            if(cur === start) {
+                start++
+                break
+            }
+        }
+    }
+}
+```
+
 ---
