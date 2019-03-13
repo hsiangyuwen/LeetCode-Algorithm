@@ -45,6 +45,18 @@ def maxSubArray(self, nums: 'List[int]') -> 'int':
     return max_sum
 ```
 
+#### JavaScript (Aggregate)
+```javascript
+var maxSubArray = function(nums) {
+    let maxSum = nums[0], val = 0
+    nums.forEach(num => {
+        maxSum = Math.max(maxSum, val += num)
+        val = Math.max(val, 0)
+    })
+    return maxSum
+}
+```
+
 ---
  > Kadane's algorithm
 
@@ -72,6 +84,19 @@ def maxSubArray(self, nums: 'List[int]') -> 'int':
         max_so_far = max(max_so_far, max_ending_here)
     
     return max_so_far
+```
+
+#### JavaScript (Kadane's Algorithm)
+##### tags: `Kadane's Algorithm`
+```javascript
+var maxSubArray = function(nums) {
+    let maxSoFar = nums[0]
+    for(let i = 1, maxEndHere = nums[0]; i < nums.length; ++i) {
+        maxEndHere = Math.max(nums[i], maxEndHere + nums[i])
+        maxSoFar = Math.max(maxSoFar, maxEndHere)
+    }
+    return maxSoFar
+}
 ```
 
 ---
@@ -112,6 +137,33 @@ def maxSubArray(self, nums: 'List[int]') -> 'int':
         return max((left_extend_max_sum + nums[mid] + right_extend_max_sum), lmax, rmax)
     
     return max_sub(nums, 0, len(nums) - 1)
+```
+
+#### JavaScript (Divide and Conquer)
+##### tags: `Divide and Conquer`
+```javascript
+const maxSub = (nums, left, right) => {
+    if(left === right)
+        return nums[left]
+    else if(left > right)
+        return Number.NEGATIVE_INFINITY
+    
+    let mid = Math.floor((left + right) / 2)
+    let lmax = maxSub(nums, left, mid - 1)
+    let rmax = maxSub(nums, mid + 1, right)
+    
+    let leftExtendMaxSum = rightExtendMaxSum = 0
+    for(let i = mid - 1, tempTotal = 0; i >= left; --i)
+        leftExtendMaxSum = Math.max(tempTotal += nums[i], leftExtendMaxSum)
+
+    for(let i = mid + 1, tempTotal = 0; i <= right; ++i)
+        rightExtendMaxSum = Math.max(tempTotal += nums[i], rightExtendMaxSum)
+
+    return Math.max(leftExtendMaxSum + nums[mid] + rightExtendMaxSum, lmax, rmax)
+}
+
+var maxSubArray = nums =>
+    maxSub(nums, 0, nums.length - 1)
 ```
 
 ---
