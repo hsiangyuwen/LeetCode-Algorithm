@@ -55,7 +55,7 @@ def maxDistToClosest(self, seats):
     return largest_distance
 
 ```
-####Golang
+#### Golang
 ```go
 func maxDistToClosest(seats []int) int {
     max := 0
