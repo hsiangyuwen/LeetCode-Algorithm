@@ -71,4 +71,26 @@ def arrayPairSum(self, nums: List[int]) -> int:
 ```
 - 解釋：不使用collections.Counter，因為它並沒有保留key由小到大的順序性。
 - 優/缺點：其實在每一次call這個function的時候都會開出20001個空間，並且確定都會走 len(nums) + 20001 步，測出來很容易不快。
+
+#### JavaScript
+```javascript
+const arrayPairSum = nums => {
+    const OFFSET = 1e4
+    let occur = new Array(20001).fill(0)
+    let min = 1e5, max = 0, ret = 0 - OFFSET * nums.length / 2
+    nums.forEach(n => {
+        n += OFFSET
+        occur[n]++
+        min = Math.min(min, n)
+        max = Math.max(max, n)
+    })
+    
+    for(let num = min, flag = 0; num <= max; ++num)
+        while(occur[num]--)
+            if(flag ^= 1)
+                ret += num
+    return ret
+}
+```
+- 解釋：我事先減去 `OFFSET` 的值，可以避免最後計算答案時重複減去的操作，另外紀錄最小及最大值縮小最後遍歷的範圍，最後利用 XOR(`^`) 的特性實踐隔一個值紀錄的操作。
 ---
