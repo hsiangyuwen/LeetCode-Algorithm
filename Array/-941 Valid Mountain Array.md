@@ -54,4 +54,16 @@ def validMountainArray(self, A: List[int]) -> bool:
     return i == len(A) - 1
 ```
 - 解釋：這是官方solution。詳細去算步數會發現我們自己使用的解法和官方解法，步數都是array的長度。
+#### Golang
+```go
+func validMountainArray(A []int) bool {
+    if len(A) < 3{
+        return false
+    }    
+    l, r := 0, len(A)-1
+    for l<len(A)-1 && A[l]<A[l+1]{l++}
+    for r>0 && A[r]<A[r-1]{r--}
+    return l>0 && l == r && r<len(A)-1
+}
+```
 ---
