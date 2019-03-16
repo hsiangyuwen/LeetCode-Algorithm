@@ -62,5 +62,16 @@ def isMonotonic(self, A: 'List[int]') -> 'bool':
 - Tips：`zip([1, 2, 3], [2, 3]) => [(1, 2), (2, 3)]` （zip function是回傳一個迭代器，如果要印出list要用list function包住。）
 - 解釋：Python3把compare function拿掉了，而Python世界中，True == 1、False == 0，因此我們可以用 `(i>j)-(i<j)` 表示compare function的運算。
 (Ref: https://stackoverflow.com/questions/22490366/how-to-use-cmp-in-python-3)
+
+#### JavaScript
+```javascript
+var isMonotonic = function(A) {
+    let inc = true, dec = true
+    for(let i = 0; i < A.length - 1; ++i)
+        inc &= A[i] <= A[i+1], dec &= A[i] >= A[i+1]
+
+    return inc || dec
+}
+```
 ---
 
