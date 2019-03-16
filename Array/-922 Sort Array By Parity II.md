@@ -37,4 +37,16 @@ public:
     }
 };
 ```
+
+#### JavaScript
+```javascript
+var sortArrayByParityII = function(A) {
+    for(let i = 0, j = 1; i < A.length && j < A.length; i += 2, j += 2){
+        while(A[i] % 2 === 0 && i < A.length) i += 2
+        while(A[j] % 2 === 1 && j < A.length) j += 2
+        if(i < A.length) [A[i], A[j]] = [A[j], A[i]]
+    }
+    return A
+}
+```
 ---
