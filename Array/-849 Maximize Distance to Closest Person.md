@@ -86,4 +86,36 @@ func maxInt(a,b int) int{
     return b
 }
 ```
+
+#### JavaScript
+```javascript
+var maxDistToClosest = function(seats) {
+    let start = maxDistance = 0
+    while(!seats[start++])
+        maxDistance++
+
+    for(let i = start - 1; i < seats.length; ++i) {
+        if(seats[i]) {
+            maxDistance = Math.max(maxDistance, Math.floor((i - start) / 2))
+            start = i
+        }
+    }
+    
+    maxDistance = Math.max(maxDistance, seats.length - 1 - start)
+    return maxDistance
+}
+```
+
+#### JavaScript(Brief Solution)
+```javascript
+var maxDistToClosest = function(seats) {
+    let start = maxDist = 0
+    for(let j = 0; j < seats.length; ++j)
+        if(seats[j] === 1) { 
+            maxDist = Math.max(maxDist, start === 0 ? j - start : (j - start + 1) >> 1)
+            start = j + 1
+        }
+    return Math.max(maxDist, seats.length - start)
+}
+```
 ---
