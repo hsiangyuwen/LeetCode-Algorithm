@@ -100,4 +100,78 @@ def imageSmoother(self, M: 'List[List[int]]') -> 'List[List[int]]':
 	
 	return ret
 ```
+
+#### JavaScript
+```javascript
+var imageSmoother = function(M) {
+    let rows = M.length, cols = M[0].length
+    let ret = new Array(rows).fill(0).map(_ => new Array(cols).fill(0))
+    for(let r = 0; r < rows; ++r) {
+        for(let c = 0; c < cols; ++c) {
+            let count = 0
+            for(let x of [-1, 0, 1])
+                for(let y of [-1, 0, 1])
+                    if(isValid(r + x, c + y, rows, cols)) {
+                        count++
+                        ret[r][c] += M[r + x][c + y]
+                    }
+            ret[r][c] = Math.floor(ret[r][c] / count)
+        }
+    }
+    return ret
+}
+
+const isValid = (r, c, rows, cols) =>
+    r < rows && r >= 0 && c < cols && c >= 0
+```
+* 解釋：
+    1. 初始化：請注意下方的錯誤示範
+	```javascript
+	new Array(rows).fill(new Array(cols))
+	```
+	這會導致改一列，所有的列都跟著被改，`fill`會無腦把所有列指向同一個陣列，因此如果照這種打法，執行後會所有的列都是最後一列的值，所以要用 `map` 去賦予每一列不同的 Array。
+	
+    2. (進階) 閉包：大家會注意到 `isValid` 函數每次都要傳相同的 `rows` 及 `cols` ，所以可以寫個 `function` 去 **製造** `function`。
+	```javascript
+	const validationMaker = function(rows, cols) {
+	    return function(r, c) {
+		return r < rows && r >= 0 && c < cols && c >= 0
+	    }
+	}
+	// es6
+	const validationMaker = (rows, cols) =>
+	    (r, c) => r < rows && r >= 0 && c < cols && c >= 0
+	```
+	在執行遍歷前用 `validationMaker` 去客製化 `isValid`：
+	```javascript
+	let isValid = validationMaker(rows, cols)
+	```
+	接下來的判斷即可改成：
+	```javascript
+	if(isValid(r + x, c + y))
+	```
+	可以避免傳多餘的參數，看起來也更精簡(附上閉包的代碼)。
+	```javascript
+	var imageSmoother = function(M) {
+	    let rows = M.length, cols = M[0].length
+	    let ret = new Array(rows).fill(0).map(_ => new Array(cols).fill(0))
+	    let isValid = validationMaker(rows, cols)
+	    for(let r = 0; r < rows; ++r) {
+		for(let c = 0; c < cols; ++c) {
+		    let count = 0
+		    for(let x of [-1, 0, 1])
+			for(let y of [-1, 0, 1])
+			    if(isValid(r + x, c + y)) {
+				count++
+				ret[r][c] += M[r + x][c + y]
+			    }
+		    ret[r][c] = Math.floor(ret[r][c] / count)
+		}
+	    }
+	    return ret
+	}
+
+	const validationMaker = (rows, cols) =>
+	    (r, c) => r < rows && r >= 0 && c < cols && c >= 0
+	```
 ---
