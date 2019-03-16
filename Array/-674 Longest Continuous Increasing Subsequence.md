@@ -100,4 +100,17 @@ def findLengthOfLCIS(self, nums: 'List[int]') -> 'int':
 - 解釋：直接用一個變數 `temp` 去累加而得到increase subsequence的長度。如果遇到不increase就再設回1。
 - Tips：因為是在「`temp`設回1」的時候去計算最大長度，在整個遍歷一次的過程後，要再檢查一次。
 
+#### JavaScript
+```javascript
+var findLengthOfLCIS = function(nums) {
+    let maxCount = Math.min(1, nums.length)
+    for(let i = 1, count = 1; i < nums.length; ++i)
+        if(nums[i] > nums[i - 1])
+            maxCount = Math.max(maxCount, ++count)
+        else
+            count = 1
+    return maxCount
+}
+```
+
 ---
