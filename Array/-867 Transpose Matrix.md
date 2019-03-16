@@ -29,4 +29,23 @@ def transpose(self, A: List[List[int]]) -> List[List[int]]:
 ```
 - 解釋：`zip(*A)` 意同 `zip(A[0], A[1], ..., A[m])` ，也就會變成 `iter((A[0][0], A[1][0], ..., A[m][0]), ..., (A[0][n], A[1][n], ..., A[m][n]))` ，轉成list之後就變成轉置矩陣了。
 
+#### JavaScript
+```javascript
+var transpose = function(A) {
+    let ret = new Array(A[0].length)
+    for(let i = 0; i < A[0].length; ++i){
+        ret[i] = new Array(A.length)
+        for(let j = 0; j < A.length; ++j)
+            ret[i][j] = A[j][i]
+    }
+    return ret
+}
+```
+
+#### JavaScript (1-line)
+```javascript
+const transpose = A => A[0].map((_, i) => A.map(row => row[i]))
+```
+- 解釋：第一個 `map` 只為取其**行數**，由於新的每一列即是原本舊的每一行，所以第二個 `map` 做的事就是提取原本的第 `i` 行放到新的第 `i` 列。
+
 ---
