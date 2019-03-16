@@ -47,4 +47,11 @@ def flipAndInvertImage(self, A: 'List[List[int]]') -> 'List[List[int]]':
     return [[1 - item for item in reversed(row)] for row in A]
 ```
 - 解釋：使用了兩個list comprehension。
+
+#### JavaScript
+```javascript
+const flipAndInvertImage = A =>
+    A.map(row => row.map(e => e ^ 1).reverse())
+```
+
 ---
