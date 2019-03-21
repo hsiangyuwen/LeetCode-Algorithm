@@ -42,4 +42,21 @@ var findMaxConsecutiveOnes = function(nums) {
 }
 ```
 - 解釋：利用陣列只包含 1 跟 0 的性質，如果遍歷過程遇到 0， `cur` 就會被歸零；反之，則會 + 1。
+#### Golang (直觀解)
+```go
+func findMaxConsecutiveOnes(nums []int) int {
+    count, max := 0, 0
+    for _,val := range nums{
+        if val == 1{
+            count++
+            if count > max{
+                max = count
+            }            
+        }else{
+            count = 0
+        }
+    }
+    return max
+}
+```
 ---
