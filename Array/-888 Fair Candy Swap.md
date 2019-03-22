@@ -47,4 +47,30 @@ var fairCandySwap = function(A, B) {
             return [a, a + diff]
 }
 ```
+#### Golang (map)
+```go
+func fairCandySwap(A []int, B []int) []int {
+    diff := sum(A)-sum(B)
+    
+    diff /= 2
+    setA := make(map[int]int)
+    for _, val := range A{
+        setA[val-diff] = val
+    }
+    for _, val := range B{
+        result, ok := setA[val]
+        if ok{
+            return []int{result, val}
+        }
+    }
+    return []int{}
+}
+func sum(num []int) int{
+    sum := 0
+    for _, val := range num{
+        sum += val
+    }
+    return sum    
+}
+```
 ---
