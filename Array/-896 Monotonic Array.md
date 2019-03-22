@@ -73,5 +73,24 @@ var isMonotonic = function(A) {
     return inc || dec
 }
 ```
+#### Golang
+```go
+func isMonotonic(A []int) bool {
+    isInc := false
+    isDec := false
+    
+    for i:=0; i<len(A)-1; i++ {
+        if A[i] > A[i+1]{
+            isInc = true
+        }else if A[i] < A[i+1]{
+            isDec = true
+        }
+        if isDec && isInc{
+            return false
+        }
+    }
+    return true    
+}
+```
 ---
 
