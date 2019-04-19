@@ -48,4 +48,17 @@ const transpose = A => A[0].map((_, i) => A.map(row => row[i]))
 ```
 - 解釋：第一個 `map` 只為取其**行數**，由於新的每一列即是原本舊的每一行，所以第二個 `map` 做的事就是提取原本的第 `i` 行放到新的第 `i` 列。
 
+#### Golang
+```go
+func transpose(A [][]int) [][]int {
+	result := make([][]int, len(A[0]))
+	for _, iVal := range A {
+		for j, jVal := range iVal {
+			result[j] = append(result[j], jVal)
+		}
+	}
+    return result
+}
+```
+
 ---
