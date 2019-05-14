@@ -88,4 +88,5 @@ func canPlaceFlowers(flowerbed []int, n int) bool {
     return false
 }
 ```
+- 解釋：用位元or的方式寫效率會好一點點點。
 ---
