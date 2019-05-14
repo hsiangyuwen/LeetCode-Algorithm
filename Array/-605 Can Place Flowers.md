@@ -71,4 +71,21 @@ def canPlaceFlowers(self, flowerbed: 'List[int]', n: 'int') -> 'bool':
     return n <= 0
 ```
 - 解釋：0的長度要 (2k+1) 才可以放k朵花。將邊界改善完後，遍歷一次判斷各段連續的0的長度，求出各段能放多少朵花，看總和是否大於等於n。
+
+#### Golang
+```golang
+func canPlaceFlowers(flowerbed []int, n int) bool {
+    flowerbed = append([]int{0}, append(flowerbed, 0)...)
+    for i:=1 ; i<len(flowerbed)-1; i++{
+        if (flowerbed[i-1] | flowerbed[i] | flowerbed[i+1]) == 0{
+            flowerbed[i] = 1
+            n--
+        }
+        if n <= 0{
+            return true
+        }
+    }
+    return false
+}
+```
 ---
