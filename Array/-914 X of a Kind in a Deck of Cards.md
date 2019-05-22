@@ -56,7 +56,7 @@ def hasGroupsSizeX(self, deck: List[int]) -> bool:
         while y != 0:
             x, y = y, x % y
         return x
-    
+
     # Counter
     counter = {}
     for card in deck:
@@ -64,16 +64,16 @@ def hasGroupsSizeX(self, deck: List[int]) -> bool:
             counter[card] += 1
         else:
             counter[card] = 1
-    
+
     # reduce(gcd, iterable)
     vals = list(counter.values())
     if len(vals) == 1:
         return vals[0] >= 2
-    
-    ret = gcd(vals[0], vals[1])
-    for i in range(2, len(vals)):
+
+    ret = 0
+    for i in range(len(vals)):
         ret = gcd(ret, vals[i])
-    
+
     return ret >= 2
 ```
 - 解釋：如果自己實作全部的東西，就會長這樣子。
