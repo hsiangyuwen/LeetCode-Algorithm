@@ -78,3 +78,25 @@ def hasGroupsSizeX(self, deck: List[int]) -> bool:
 ```
 - 解釋：如果自己實作全部的東西，就會長這樣子。
 ---
+#### Golang
+```golang
+func gcd (x, y int) int{
+    for y != 0{
+        x, y = y, x % y
+    }
+    return x
+}
+
+func hasGroupsSizeX(deck []int) bool {
+
+    counter := make(map[int]int)
+    for _, val := range(deck){
+        counter[val] ++
+    }
+    ret := 0
+    for _, val := range(counter){
+        ret = gcd(ret, val)
+    }
+    return ret >= 2
+}
+```
