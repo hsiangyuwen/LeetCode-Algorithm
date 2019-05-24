@@ -49,4 +49,24 @@ var sortArrayByParityII = function(A) {
     return A
 }
 ```
+
+#### Goalang
+```golang
+func sortArrayByParityII(A []int) []int {
+    j := 1
+    for i:=0; i<len(A); i+=2{
+        if A[i] % 2 != 0{
+            for j<len(A){
+                if A[j] % 2 == 0{
+                    A[i], A[j] = A[j], A[i]
+                    j += 2
+                    break
+                }
+                j += 2
+            }
+        }
+    }
+    return A
+}
+```
 ---
