@@ -50,7 +50,7 @@ var sortArrayByParityII = function(A) {
 }
 ```
 
-#### Goalang
+#### Golang
 ```golang
 func sortArrayByParityII(A []int) []int {
     j := 1
