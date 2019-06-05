@@ -66,4 +66,41 @@ var removeElement = function(nums, val) {
     return curIndex
 }
 ```
+
+#### C++ (stupid)
+看了Ray的優秀解以後我很慚愧，我考慮太多有關removable位置該何去何從
+```
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        vector<int> idx_change;
+        int total = nums.size();
+        int new_total = nums.size();
+        for(int i = 0; i < total; i++) 
+        {
+            if(nums[i] == val)
+            {
+                // find the changable position, total_length-- first
+                new_total--;
+                // then push this position into list
+                idx_change.push_back(i);
+            }
+            else
+            {
+                if(!idx_change.empty())
+                {
+                    // assign the current value to the first changable position
+                    nums[idx_change.front()] = nums[i];
+                    // now current position can be the changable one
+                    // so add it into the changable list
+                    idx_change.push_back(i);
+                    // the first changable one is used, so erase it from the list
+                    idx_change.erase(idx_change.begin());
+                }
+            }
+        }
+        return new_total;
+    }
+};
+```
 ---
