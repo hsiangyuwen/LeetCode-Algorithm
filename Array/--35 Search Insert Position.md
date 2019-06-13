@@ -50,7 +50,7 @@ func searchInsert(nums []int, target int) int {
 ```
 
 #### C++
-```
+```c++
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
