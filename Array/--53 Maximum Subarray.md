@@ -99,6 +99,23 @@ var maxSubArray = function(nums) {
 }
 ```
 
+#### C++
+##### tags: `Kadane's Algorithm`
+```c++
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int answer_max = -2147483647;
+        int cul = 0;
+        for(int i = 0; i < nums.size(); i++){
+            cul = max(cul+nums[i], nums[i]);
+            if(cul > answer_max) answer_max = cul;
+        }
+        return answer_max;
+    }
+};
+```
+
 ---
 > Divide and Conquer
 
@@ -168,18 +185,4 @@ var maxSubArray = nums =>
 
 ---
 
-#### C++
-```c++
-class Solution {
-public:
-    int maxSubArray(vector<int>& nums) {
-        int answer_max = -2147483647;
-        int cul = 0;
-        for(int i = 0; i < nums.size(); i++){
-            cul = max(cul+nums[i], nums[i]);
-            if(cul > answer_max) answer_max = cul;
-        }
-        return answer_max;
-    }
-};
-```
+
