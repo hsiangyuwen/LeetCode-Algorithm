@@ -79,6 +79,7 @@ public:
                 digits[i] = (digits[i] + 1) - 10;
             } 
         }
+        // if there is a need of increasing one more digit, since carry go through all digit ( e.g. 99, 999 )  
         digits.insert(digits.begin(), 1);
         return digits;
     }
