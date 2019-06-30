@@ -141,4 +141,35 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 }
 ```
 - Tips：避免index error，所以裡面的`j < 0 || i >= 0 && nums1[i] >= nums2[j]`排序很重要。
+
+#### C++
+```c++
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int j = 0;
+        for(int i = 0; i < nums1.size(); i++)
+        {
+            if(j < n) // nums2 is not finished
+            {
+                if(nums2[j] >= nums1[i] && i < m+j)
+                {
+                    // keep looking backward
+                    // i < m+j -> to determine whether nums1's value is finished 
+                    continue;
+                }
+                else
+                {
+                    // insert into the current position of nums1
+                    nums1.insert(nums1.begin()+i, nums2[j]);
+                    // remove the zero in the last position to maintain the nums1's original length
+                    nums1.pop_back(); 
+                    j++;
+                }
+            }
+            // When j == n, it is end of nums2, and the remained nums1's elements must be on the right position
+        }
+    }
+};
+```
 ---
