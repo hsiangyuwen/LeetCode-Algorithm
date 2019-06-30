@@ -57,4 +57,31 @@ var plusOne = function(digits) {
     return [1, ...digits]
 }
 ```
+
+#### C++
+```c++
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        for(int i = digits.size()-1; i >= 0; i--)
+        {
+            /*
+                Since only plus one, the carry always be 1 
+                and just need to check whether digit is 9 or not
+            */
+            if(digits[i] != 9) // no carry
+            {
+                digits[i] += 1;
+                return digits;
+            }
+            else // need carry
+            {
+                digits[i] = (digits[i] + 1) - 10;
+            } 
+        }
+        digits.insert(digits.begin(), 1);
+        return digits;
+    }
+};
+```
 ---
