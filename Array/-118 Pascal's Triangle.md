@@ -70,4 +70,44 @@ var generate = function(numRows) {
     return result
 }
 ```
+
+#### C++
+```C++
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> output;
+        for(int i = 1; i <= numRows; i++)
+        {
+            vector<int> curRow;
+            if(i == 1){
+                // fixed rule of pascal triangle
+                curRow.push_back(1);
+                output.push_back(curRow);
+            }
+            else if(i == 2){
+                // fixed rule of pascal triangle
+                curRow.push_back(1);
+                curRow.push_back(1);
+                output.push_back(curRow);
+            }
+            else // use the pascal's rule
+            {
+                curRow.push_back(1); // the first element must be 1
+                // notice that the actual row number in vector currently is i-1, so lastRow = i-2
+                vector<int> lastRow = output[i-2]; 
+                for(int j = 2; j <= i-1; j++){ 
+                    // j is the index of the element we are going to calculate in curRow
+                    // and we will use the j-1th and jth element of lastRow to calculate
+                    // also, notice that the actual elements' numbers need to minus one to fetch
+                    curRow.push_back(lastRow[j-2] + lastRow[j-1]);
+                }
+                curRow.push_back(1); // the last element must be 1 too
+                output.push_back(curRow);
+            }
+        }
+        return output;
+    }
+};
+```
 ---
