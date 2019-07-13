@@ -71,4 +71,43 @@ def getRow(self, rowIndex: int) -> List[int]:
             
     return ret
 ```
+
+#### C++
+```C++
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int> curRow;
+        vector<int> nextRow;
+        if(rowIndex == 0){
+            curRow.push_back(1);
+            return curRow;
+        }
+        
+        // Initialize
+        curRow.push_back(1);
+        curRow.push_back(1);
+        if(rowIndex == 1)
+            return curRow;
+        
+        //  start from curRow whose rowIndex = 2
+        while(rowIndex >= 2)
+        {
+            // use curRow to calculate nextRow
+            nextRow.push_back(1); // firest element
+            for(int i = 0; i < curRow.size()-1; i++)
+            {
+                nextRow.push_back(curRow[i] + curRow[i+1]);
+            }
+            nextRow.push_back(1); // last element
+            
+            rowIndex --; // move to next row
+            curRow = nextRow;
+            nextRow.clear();
+        }
+        // curRow is the target row
+        return curRow;
+    }
+};
+```
 ---
